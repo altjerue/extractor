@@ -1,59 +1,5 @@
-# -*- coding: utf-8 -*-
-"""This is the docstring for extractor."""
-from __future__ import division
-
-
-def interpol(v1, v2, tt, NxM, logscale=False, rescale=False):
-    """Interpolate data with not a regular grid."""
-    import numpy as np
-    import scipy.interpolate
-    N = NxM[0]
-    M = NxM[1]
-    if logscale is True:
-        v1i = np.logspace(np.log10(v1.min()), np.log10(v1.max()), N)
-        v2i = np.logspace(np.log10(v2.min()), np.log10(v2.max()), M)
-    else:
-        v1i = np.linspace(v1.min(), v1.max(), N)
-        v2i = np.linspace(v2.min(), v2.max(), M)
-    ti = scipy.interpolate.griddata((v1, v2), tt,
-                                    (v1i[None, :], v2i[:, None]),
-                                    method='cubic', rescale=rescale)
-    return v1i, v2i, ti
-
-
-def dataExtract3col(filename, NxM, cols=(0, 1, 2), rescale=False):
-    """Extract 3 columns from a data file.
-
-    Three columns extraction routine. Getting data ready for contour
-    plotting.
-
-    filename: string
-    Name of the file with at least four columns.
-
-    N: int
-    Size of the temporal arrays to generate the grid.
-
-    cols: Tuple
-    Tuple of three int referring to the columns to be read.
-    """
-    import numpy as np
-    return np.loadtxt(filename, usecols=cols, unpack=True)
-
-
-def dataExtract2col(filename, cols=(0, 1)):
-    """Extract 3 columns from a data file.
-
-    Four columns extraction routine. Getting data ready for contour
-    plotting.
-
-    filename: string
-    Name of the file with at least four columns.
-
-    cols: tuple
-    Tuple of two int referring to the columns to be read.
-    """
-    import numpy as np
-    return np.loadtxt(filename, usecols=cols, unpack=True)
+import numpy as np
+import h5py as h5
 
 
 def hdf5ExtractScalar(h5file, dsets, group=None):
@@ -66,8 +12,7 @@ def hdf5ExtractScalar(h5file, dsets, group=None):
     dsets: strings
     scalar datasets names
     """
-    import numpy as np
-    import h5py as h5
+
     h5f = h5.File(h5file, 'r')
     if group is None:
         if type(dsets) is list:
@@ -100,8 +45,6 @@ def hdf5Extract1D(h5file, dsets, group=None):
     ds1,ds2: strings
     1D data set names
     """
-    import numpy as np
-    import h5py as h5
     h5f = h5.File(h5file, 'r')
     if group is None:
         if type(dsets) is list:
@@ -134,8 +77,6 @@ def hdf5Extract2D(h5file, dsets, group=None):
     dsets: string or array of strings
     2D data set names
     """
-    import numpy as np
-    import h5py as h5
     h5f = h5.File(h5file, 'r')
     if group is None:
         if type(dsets) is list:
@@ -168,8 +109,6 @@ def hdf5Extract3D(h5file, dsets, group=None):
     dsets: strings or array of strings
     3D data set names
     """
-    import numpy as np
-    import h5py as h5
     h5f = h5.File(h5file, 'r')
     if group is None:
         if type(dsets) is list:
@@ -198,8 +137,6 @@ def hdf5Extract4D(h5file, dsets, group=None):
     dsets: strings or array of strings
     3D data set names
     """
-    import numpy as np
-    import h5py as h5
     h5f = h5.File(h5file, 'r')
     if group is None:
         if type(dsets) is list:
