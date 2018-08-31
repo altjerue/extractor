@@ -49,8 +49,8 @@ def hdf5Extract1D(h5file, dsets, group=None):
     if group is None:
         if type(dsets) is list:
             v = []
-            for i in range(0, len(dsets)):
-                v.append(h5f[dsets[i]][:])
+            for dset in dsets:
+                v.append(h5f[dset][:])
             v = np.array(v)
             v = v.squeeze()
         else:
@@ -58,8 +58,8 @@ def hdf5Extract1D(h5file, dsets, group=None):
     else:
         if type(dsets) is list:
             v = []
-            for i in range(0, len(dsets)):
-                v.append(h5f[group][dsets[i]][:])
+            for dset in dsets:
+                v.append(h5f[group][dsets][:])
             v = np.array(v)
             v = v.squeeze()
         else:
