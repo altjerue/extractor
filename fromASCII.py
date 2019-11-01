@@ -18,7 +18,7 @@ def interpol(v1, v2, tt, NxM, logscale=False, rescale=False):
     return v1i, v2i, ti
 
 
-def dataExtract3col(filename, NxM, cols=(0, 1, 2), rescale=False):
+def dataExtract3col(filename, cols=(0, 1, 2), rescale=False):
     """Extract 3 columns from a data file.
 
     Three columns extraction routine. Getting data ready for contour
@@ -26,9 +26,6 @@ def dataExtract3col(filename, NxM, cols=(0, 1, 2), rescale=False):
 
     filename: string
     Name of the file with at least four columns.
-
-    N: int
-    Size of the temporal arrays to generate the grid.
 
     cols: Tuple
     Tuple of three int referring to the columns to be read.
